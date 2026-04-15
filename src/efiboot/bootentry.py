@@ -13,14 +13,16 @@ class TailFileGptDrivePart:
     """
     this is a structure where last location information
     node is "file" followed by "GPT drive partition"
+
+    throws ValueError if structure doesn't match
     """
 
-    def __init__(self, lln: list[LoaderLocationNode]):
-        if len(lln) < 2:
+    def __init__(self, loader_location: list[LoaderLocationNode]):
+        if len(loader_location) < 2:
             raise ValueError("Structure mismatch")
 
-        file_node = lln[-1]
-        part_node = lln[-2]
+        file_node = loader_location[-1]
+        part_node = loader_location[-2]
 
         if not (
             file_node.type == 4
